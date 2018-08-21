@@ -20,14 +20,16 @@
     <div class="footer" v-if="data.footer">
       {{ data.footer }}
     </div>
+    <ScrollTop></ScrollTop>
   </div>
 </template>
 
 <script>
 import NavLink from './NavLink.vue'
+import ScrollTop from './ScrollTop.vue'
 
 export default {
-  components: { NavLink },
+  components: { NavLink, ScrollTop },
   computed: {
     data () {
       return this.$page.frontmatter

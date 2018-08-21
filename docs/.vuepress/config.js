@@ -1,5 +1,5 @@
 module.exports = {
-  dest: 'vuepress',
+  dest: 'blog-dest',
   locales: {
     '/': {
       lang: 'zh-CN',
@@ -19,7 +19,8 @@ module.exports = {
     ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
   ],
   serviceWorker: true,
-  theme: 'vue',
+  // theme: 'vue',
+  theme: '',
   themeConfig: {
     repo: 'https://github.com/BendongZ',
     // editLinks: true,
@@ -42,6 +43,10 @@ module.exports = {
           {
             text: '生活',
             link: '/life/'
+          },
+          {
+            text: '关于我',
+            link: '/about/'
           }
         ],
         sidebar: {
@@ -49,6 +54,9 @@ module.exports = {
         }
       }
     }
+  },
+  markdown: { 
+    lineNumbers: true
   }
 }
 

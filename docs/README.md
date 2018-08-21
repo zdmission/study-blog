@@ -29,6 +29,15 @@ vuepress dev
 vuepress build
 ```
 
+``` js{2}
+let a = 1
+console.log(123)
+```
+
 ::: warning COMPATIBILITY NOTE
 VuePress requires Node.js >= 8.
+:::
+
+::: tip
+This is a tip
 :::
