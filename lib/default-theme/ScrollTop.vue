@@ -28,7 +28,18 @@ export default {
   },
   methods: {
     goToTop () {
-      window.scrollTo(0, 0)
+      // 回到顶部加一个缓动动画
+      const timer = setInterval(() => {
+        let dis = document.documentElement.scrollTop || document.body.scrollTop, speed = dis / 4
+        if (document.body.scrollTop != 0) {
+          document.body.scrollTop -= speed
+        } else {
+          document.documentElement.scrollTop -= speed
+        }
+        if (dis == 0) {
+          clearInterval(timer)
+        }
+      }, 30)
     }
   }
 }
@@ -41,7 +52,7 @@ export default {
   height 50px
   width 50px
   bottom 50px
-  right 50px
+  right 25px
   background-color #e5e5ee
   text-align center
   line-height 50px

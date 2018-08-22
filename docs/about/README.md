@@ -1,5 +1,2 @@
----
-sidebar: auto
----
-
-# 关于
+# about me
+<center>这一行需要居中</center>

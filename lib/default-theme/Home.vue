@@ -11,7 +11,7 @@
       </p>
     </div>
     <div class="features" v-if="data.features && data.features.length">
-      <div class="feature" v-for="feature in data.features">
+      <div class="feature" v-for="(feature, index) in data.features" :key="index">
         <h2>{{ feature.title }}</h2>
         <p>{{ feature.details }}</p>
       </div>
@@ -21,15 +21,17 @@
       {{ data.footer }}
     </div>
     <ScrollTop></ScrollTop>
+    <RaysLine></RaysLine>
   </div>
 </template>
 
 <script>
 import NavLink from './NavLink.vue'
 import ScrollTop from './ScrollTop.vue'
+import RaysLine from './RaysLine.vue'
 
 export default {
-  components: { NavLink, ScrollTop },
+  components: { NavLink, ScrollTop, RaysLine },
   computed: {
     data () {
       return this.$page.frontmatter
@@ -54,9 +56,10 @@ export default {
   .hero
     text-align center
     img
-      max-height 280px
+      max-height 180px
       display block
       margin 3rem auto 1.5rem
+      border-radius 50%
     h1
       font-size 3rem
     h1, .description, .action
@@ -71,8 +74,8 @@ export default {
       font-size 1.2rem
       color #fff
       background-color $accentColor
-      padding 0.8rem 1.6rem
-      border-radius 4px
+      padding 0.8rem 3.6rem
+      border-radius 30px
       transition background-color .1s ease
       box-sizing border-box
       border-bottom 1px solid darken($accentColor, 10%)

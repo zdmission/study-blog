@@ -2,6 +2,16 @@
 
 $mobileSidebarWidth = $sidebarWidth * 0.82
 
+@media (max-width: 10000px)
+  .sidebar
+    left 1rem
+    bottom 1rem
+    top 4.6rem
+    box-sizing border-box
+    border 1px solid $borderColor
+    border-radius 8px
+    box-shadow 0 1px 3px rgba(26,26,26,.1)
+
 // narrow desktop / iPad
 @media (max-width: $MQNarrow)
   .sidebar
@@ -13,6 +23,12 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
 // wide mobile
 @media (max-width: $MQMobile)
   .sidebar
+    left 0
+    bottom 0
+    border none 
+    box-shadow none 
+    border-radius 0
+    border-right solid 1px $borderColor
     top 0
     padding-top $navbarHeight
     transform translateX(-100%)
@@ -22,9 +38,21 @@ $mobileSidebarWidth = $sidebarWidth * 0.82
   .theme-container
     &.sidebar-open
       .sidebar
+        left 0
+        bottom 0
+        border none 
+        box-shadow none 
+        border-radius 0
+        border-right solid 1px $borderColor
         transform translateX(0)
     &.no-navbar
       .sidebar
+        left 0
+        bottom 0
+        border none 
+        box-shadow none 
+        border-radius 0
+        border-right solid 1px $borderColor
         padding-top: 0
 
 // narrow mobile

@@ -6,12 +6,12 @@
 
 <script>
 import Layout from '@default-theme/Layout.vue'
-import ScrollTop from './ScrollTop.vue'
+import ScrollTop from '@default-theme/ScrollTop.vue'
 
 export default {
   components: {
     Layout,
-    ScrollTop
+    ScrollTop,
   },
 
   created () {

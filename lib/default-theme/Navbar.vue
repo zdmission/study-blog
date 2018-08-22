@@ -52,6 +52,7 @@ export default {
     min-width $navbarHeight - 1.4rem
     margin-right 0.8rem
     vertical-align top
+    border-radius 50%
   .site-name
     font-size 1.3rem
     font-weight 600

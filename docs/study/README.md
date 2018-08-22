@@ -1,7 +1,3 @@
----
-sidebar: auto
----
-
 # Introduction
 
 VuePress is composed of two parts: a minimalistic static site generator with a Vue-powered theming system, and a default theme optimized for writing technical documentation. It was created to support the documentation needs of Vue's own sub projects.
@@ -18,20 +14,8 @@ Each markdown file is compiled into HTML with [markdown-it](https://github.com/m
 
 ## Features
 
-- [Built-in markdown extensions](./markdown.md) optimized for technical documentation
-- [Ability to leverage Vue inside markdown files](./using-vue.md)
-- [Vue-powered custom theme system](./custom-themes.md)
-- [Automatic Service Worker generation](../config/README.md#serviceworker)
-- [Google Analytics Integration](../config/README.md#ga)
-- ["Last Updated" based on Git](../default-theme-config/README.md#last-updated)
-- [Multi-language support](./i18n.md)
-- A default theme with:
-  - Responsive layout
-  - [Optional Homepage](../default-theme-config/README.md#homepage)
-  - [Simple out-of-the-box header-based search](../default-theme-config/README.md#built-in-search)
-  - [Algolia Search](../default-theme-config/README.md#algolia-search)
-  - Customizable [navbar](../default-theme-config/README.md#navbar) and [sidebar](../default-theme-config/README.md#sidebar)
-  - [Auto-generated GitHub link and page edit links](../default-theme-config/README.md#git-repo-and-edit-links)
+- [Built-in markdown extensions](./test.md) optimized for technical documentation
+
 
 ## Todo
 

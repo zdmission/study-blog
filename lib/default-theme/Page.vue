@@ -1,5 +1,6 @@
 <template>
   <div class="page">
+    <RaysLine></RaysLine>
     <Content :custom="false"/>
     <div class="page-edit">
       <div class="edit-link" v-if="editLink">
@@ -31,6 +32,7 @@
 
 <script>
 import { resolvePage, normalize, outboundRE, endingSlashRE } from './util'
+import RaysLine from './RaysLine.vue'
 
 export default {
   props: ['sidebarItems'],
@@ -126,6 +128,9 @@ export default {
         path
       )
     }
+  },
+  components: {
+    RaysLine
   }
 }
 
@@ -161,6 +166,12 @@ function find (page, items, offset) {
 
 .page
   padding-bottom 2rem
+  .content
+    margin-top 4.6rem!important
+    padding-top 0!important
+    border solid 1px #eaecef
+    border-radius 8px
+    box-shadow 0 1px 3px rgba(26,26,26,.1)
 
 .page-edit
   @extend $wrapper

@@ -1,3 +1,5 @@
+const fs = require('fs-extra')
+const path = require('path')
 module.exports = {
   dest: 'blog-dest',
   locales: {
@@ -22,15 +24,19 @@ module.exports = {
   // theme: 'vue',
   theme: '',
   themeConfig: {
-    repo: 'https://github.com/BendongZ',
+    repo: 'https://github.com/zdmission/study-blog',
     // editLinks: true,
     docsDir: 'docs',
+    logo: '/hero.jpg',
+    accentColor: '#ac3e40',
+		per_page: 6,
+    date_format: 'yyyy-MM-dd HH:mm:ss',
     locales: {
       '/': {
         label: '简体中文',
         selectText: '选择语言',
         editLinkText: '在 GitHub 上编辑此页',
-        lastUpdated: '上次更新',
+        // lastUpdated: '上次更新',
         nav: [
           {
             text: '学习',
@@ -50,7 +56,7 @@ module.exports = {
           }
         ],
         sidebar: {
-          '/study/': genSidebarConfig('学习')
+          '/study/': genSidebarConfig('学习', getAllFileByPath('/docs/study'))
         }
       }
     }
@@ -60,14 +66,25 @@ module.exports = {
   }
 }
 
-function genSidebarConfig (title) {
+// 获取某个文件夹下的所有文件名 filePath值是根目录开始算，比如/docs/study
+function getAllFileByPath (filePath) {
+  let result = []
+  result = fs.readdirSync(path.join(process.cwd(), filePath))
+  return (result || []).map(item => {
+    if(item !== 'README.md') {
+      return item.replace(/(\.md)$/g,'')
+    }else {
+      return ''
+    }
+  })
+}
+
+function genSidebarConfig (title, arr) {
   return [
     {
       title,
-      collapsable: false,
-      children: [
-        
-      ]
+      collapsable: true,
+      children: arr
     }
   ]
 }
