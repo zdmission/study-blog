@@ -1,5 +1,6 @@
 <template>
-    <canvas id="canvas" class="canvas" :width="canvasWidth" :height="canvasHeight"></canvas>
+    <!-- <canvas id="canvas" class="canvas" :width="canvasWidth" :height="canvasHeight"></canvas> -->
+    <canvas id="canvas" class="canvas"></canvas>
 </template>
 
 <script>
@@ -15,12 +16,12 @@ export default {
     }
   },
   computed: {
-    canvasWidth () {
-      return document.documentElement.clientWidth || document.body.clientWidth
-    },
-    canvasHeight () {
-      return document.body.scrollHeight || document.documentElement.scrollHeight
-    }
+    // canvasWidth () {
+    //   return !!window && (window.document.documentElement.clientWidth || window.document.body.clientWidth)
+    // },
+    // canvasHeight () {
+    //   return !!window && (window.document.body.scrollHeight || window.document.documentElement.scrollHeight)
+    // }
   }
 }
 </script>
