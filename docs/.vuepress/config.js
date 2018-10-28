@@ -5,7 +5,7 @@ module.exports = {
   locales: {
     '/': {
       lang: 'zh-CN',
-      title: '悄无声息',
+      title: 'AmbitionElegant',
       description: '超级超级不爱学习的程序猿'
     }
   },
@@ -27,7 +27,7 @@ module.exports = {
     repo: 'https://github.com/zdmission/study-blog',
     // editLinks: true,
     docsDir: 'docs',
-    logo: '/hero.jpg',
+    logo: '/hero.png',
     accentColor: '#ac3e40',
 		per_page: 6,
     date_format: 'yyyy-MM-dd HH:mm:ss',
@@ -37,6 +37,7 @@ module.exports = {
         selectText: '选择语言',
         editLinkText: '在 GitHub 上编辑此页',
         // lastUpdated: '上次更新',
+        sidebarDepth: 5,
         nav: [
           {
             text: '学习',
@@ -45,6 +46,10 @@ module.exports = {
           {
             text: '工作',
             link: '/work/'
+          },
+          {
+            text: '日常',
+            link: '/exprience/'
           },
           {
             text: '生活',
@@ -56,35 +61,77 @@ module.exports = {
           }
         ],
         sidebar: {
-          '/study/': genSidebarConfig('学习', getAllFileByPath('/docs/study'))
+          '/study/': ['/study/'].concat(getConfigArrayData('study',['JS','CSS','Centos7.4','ES6','TypeScript','Ubuntu','Vue','Angular','Webpack','Apache-PHP-MySql','ESlint','Git','Node','Gulp','Ionic2-up','Npm'])),
+          '/work/': ['/work/'].concat(getConfigArrayData('work',['JS',{cnName: '琐碎', enName: 'suosui'},'CSS','Vue','Ionic1','Linux','Mac','Mobile','WeChat','Webpack','weex','Cordova',{cnName: '服务端', enName: 'Service'}])),
+          '/exprience/': genSidebarConfig('日常', getAllFileByPath('/docs/exprience')),
+          '/life/': [
+            '/life/',
+            genSidebarConfigGroup('rap', getAllFileByPath('/docs/life/rap', '/life/rap/')),
+            genSidebarConfigGroup('travelling', getAllFileByPath('/docs/life/travelling', '/life/travelling/'))
+          ],
+          '/about/': genSidebarConfig('关于我', getAllFileByPath('/docs/about'))
         }
       }
     }
   },
-  markdown: { 
+  markdown: {
     lineNumbers: true
   }
 }
 
 // 获取某个文件夹下的所有文件名 filePath值是根目录开始算，比如/docs/study
-function getAllFileByPath (filePath) {
+function getAllFileByPath (filePath, directories = '') {
   let result = []
   result = fs.readdirSync(path.join(process.cwd(), filePath))
   return (result || []).map(item => {
     if(item !== 'README.md') {
-      return item.replace(/(\.md)$/g,'')
+      return directories + item.replace(/(\.md)$/g,'')
     }else {
       return ''
     }
   })
 }
 
-function genSidebarConfig (title, arr) {
+function genSidebarConfigGroup (title, children) {
+  return {
+    title,
+    collapsable: true,
+    children
+  }
+}
+
+function genSidebarConfig (title, children) {
   return [
     {
       title,
-      collapsable: true,
-      children: arr
+      collapsable: false,
+      children
     }
   ]
+}
+
+/**
+ *
+ *
+ * @param {string} catalog 类别,比如study，work，life，about等
+ * @param {array} folderNameArr 文件夹名, 默认是英文名，并且统一，比如getConfigArrayData('study',['JS']),如果有中文目录名，请这样写getConfigArrayData('study',[{cnName: '服务端', enName: 'Service'}])
+ */
+function getConfigArrayData(catalog, folderNameArr) {
+  if(folderNameArr.length == 0) return
+  let resultArr = []
+  folderNameArr.forEach(item => {
+    let cnName, enName
+    if(Object.prototype.toString.call(item) === '[object Object]') {
+      if(item.hasOwnProperty('cnName')) {
+        cnName = item.cnName
+      }
+      if(item.hasOwnProperty('enName')) {
+        enName = item.enName
+      }
+      resultArr.push(genSidebarConfigGroup(cnName, getAllFileByPath(`/docs/${catalog}/${enName}`, `/${catalog}/${enName}/`)),)
+    }else {
+      resultArr.push(genSidebarConfigGroup(item, getAllFileByPath(`/docs/${catalog}/${item}`, `/${catalog}/${item}/`)),)
+    }
+  })
+  return resultArr
 }

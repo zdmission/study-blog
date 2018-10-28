@@ -8,7 +8,7 @@
     </p>
     <DropdownTransition>
       <ul class="sidebar-group-items" ref="items" v-if="open || !collapsable">
-        <li v-for="child in item.children">
+        <li class="li-arrow" v-for="child in item.children">
           <SidebarLink :item="child"/>
         </li>
       </ul>
@@ -60,4 +60,11 @@ export default {
 .sidebar-group-items
   transition height .1s ease-out
   overflow hidden
+  .li-arrow
+    position relative
+    &:after
+      content '-->'
+      position absolute
+      top 0.12em
+      left 0.6em
 </style>

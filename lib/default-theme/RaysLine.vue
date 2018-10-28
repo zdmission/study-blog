@@ -11,8 +11,7 @@ export default {
   },
   watch: {
     $route (to, from) {
-      console.log(to.path)
-                import('./canvasline')
+      import('./canvasline')
     }
   },
   computed: {

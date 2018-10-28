@@ -1,43 +1,23 @@
 ---
 home: true
-heroImage: /hero.jpg
-actionText: GO →
+heroImage: /hero.png
+actionText: LB →
 actionLink: /study/
 features:
 - title: 学习
-  details: 总是走学习的路上.
+  details: 好好学习.
 - title: 工作
   details: 好好工作.
 - title: 生活
-  details: 当然必须玩的开心.
-footer: Copyright © 2015 - 2018 京ICP备18038351号 Michet
+  details: 余生很短，好好吃饭，好好生活.
+footer: Copyright © 2015 - 至今 京ICP备18038351号 Michel
 ---
 
-### As Easy as 1, 2, 3
+### 要么庸俗，要么孤独
 
-``` bash
-# install
-yarn global add vuepress # OR npm install -g vuepress
+::: tip life is like a journey
 
-# create a markdown file
-echo '# Hello VuePress' > README.md
+Be all in or get all out
 
-# start writing
-vuepress dev
-
-# build to static files
-vuepress build
-```
-
-``` js{2}
-let a = 1
-console.log(123)
-```
-
-::: warning COMPATIBILITY NOTE
-VuePress requires Node.js >= 8.
-:::
-
-::: tip
-This is a tip
+There is no halfway
 :::
