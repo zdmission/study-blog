@@ -1,6 +1,16 @@
+# 开发
+```bash
+npm run dev
+```
+
+# 构建代码并上传到服务器
+```bash
+npm run build
+```
+
 # 注意事项
 
-* 项目中加入了上传文件到服务器，使用的gulp-sftp，配置可参考
+* 项目中加入了上传文件到服务器，使用的gulp-sftp，配置可参考，在根目录下边创建gulpfile.js文件，文件内容如下，填写相关服务器的信息
 ```
 const gulp = require('gulp')
 const ftp = require('gulp-sftp')
