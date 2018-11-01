@@ -1,0 +1,9 @@
+# webpack中resolve下的modules使用
+
+webpack中resolve下的modules，目的是改变引用模块的位置，比如把node_modules放在和项目文件不同的位置，然后通过指向让需要的模块都去指定位置的node_modules中找，比如
+
+![webpack](/work/Webpack/webpack5.png)
+
+图片中判断是false的话，模块查找就会到/server/node_modules中查找，这样便可以实现多个项目共享一个node_modules文件夹了，节省我们的磁盘空间
+
+如果是在linux系统下，就可以使用软连接来实现node_modules共享，ln -s 共享文件目录node_modules 项目根目录下的node_modules

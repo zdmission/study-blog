@@ -6,7 +6,7 @@ module.exports = {
     '/': {
       lang: 'zh-CN',
       title: 'AmbitionElegant',
-      description: '超级超级不爱学习的程序猿'
+      description: '超级超级不爱“学习”的程序猿'
     }
   },
   head: [
@@ -62,7 +62,7 @@ module.exports = {
         ],
         sidebar: {
           '/study/': ['/study/'].concat(getConfigArrayData('study',['JS','CSS','Centos7.4','ES6','TypeScript','Ubuntu','Vue','Angular','Webpack','Apache-PHP-MySql','ESlint','Git','Node','Gulp','Ionic2-up','Npm'])),
-          '/work/': ['/work/'].concat(getConfigArrayData('work',['JS',{cnName: '琐碎', enName: 'suosui'},'CSS','Vue','Ionic1','Linux','Mac','Mobile','WeChat','Webpack','weex','Cordova',{cnName: '服务端', enName: 'Service'}])),
+          '/work/': ['/work/'].concat(getConfigArrayData('work',['JS',{cnName: '琐碎', enName: 'suosui'},{cnName: '日常', enName: 'Common'},'Vue','Webpack','CSS','Nodejs','Git','Gulp','Ionic1','Linux','Mac','Mobile','WeChat','weex','Cordova',{cnName: '服务端', enName: 'Service'}])),
           '/exprience/': genSidebarConfig('日常', getAllFileByPath('/docs/exprience')),
           '/life/': [
             '/life/',
