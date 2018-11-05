@@ -38,11 +38,11 @@ js的模板语法
         options
             
     <div>files的属性及属性值</div>
-        publicPath:""                           
-        chunks:{"main":{"size":16136,"entry":"js/main-35b8b1d4b24478b347c6.js","hash":"35b8b1d4b24478b347c6","css":[]},"a":{"size":39,"entry":"js/a-d41595b60ca2149e6955.js","hash":"d41595b60ca2149e6955","css":[]}}                           
-        js:["js/main-35b8b1d4b24478b347c6.js","js/a-d41595b60ca2149e6955.js"]                            
-        css:[]                            
-        manifest:                            
+        publicPath:""
+        chunks:{"main":{"size":16136,"entry":"js/main-35b8b1d4b24478b347c6.js","hash":"35b8b1d4b24478b347c6","css":[]},"a":{"size":39,"entry":"js/a-d41595b60ca2149e6955.js","hash":"d41595b60ca2149e6955","css":[]}}
+        js:["js/main-35b8b1d4b24478b347c6.js","js/a-d41595b60ca2149e6955.js"] 
+        css:[] 
+        manifest: 
     <div>（插件的配置）options属性及属性值</div>
 ```
 这些参数的具体意思可以[html-webpack-plugin](https://www.npmjs.com/package/html-webpack-plugin)上详细了解
@@ -50,18 +50,18 @@ js的模板语法
 ```
 template:"C:\\Users\\ZD\\Desktop\\webpack-test\\node_modules\\._html-webpack-plugin@2.28.0@html-webpack-plugin\\lib\\loader.js!C:\\Users\\ZD\\Desktop\\webpack-test\\index.html"
                     
-filename:"index.html"                            
-hash:false                            
-inject:"head"                            
-compile:true                            
-favicon:false                            
-minify:false                            
-cache:true                            
-showErrors:true                            
-chunks:"all"                           
-excludeChunks:[]                           
-title:"webpack is good"                            
-xhtml:false                            
+filename:"index.html"
+hash:false
+inject:"head"
+compile:true
+favicon:false
+minify:false
+cache:true
+showErrors:true
+chunks:"all"
+excludeChunks:[]
+title:"webpack is good"
+xhtml:false
 date:"2017-05-13T12:04:23.791Z"
 ```
 
