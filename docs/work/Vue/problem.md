@@ -125,3 +125,53 @@ $("body").on('touchmove', function (e) {
 // 解决方式：
 ( window.scrollY+2) >= maxScrollY && offsetY < 0
 ```
+
+## 12.数据埋点在路由中的使用问题
+数据埋点中，使用了location.hash = route.fullpath 手动触发hash改变，以便能监听到hashchange的改变，然后在window.addEventListener('hashchange',function(){//处理页面PV,UV上报})，这时实际上跳转页面的时候，hash值已经改变，然后我们又手动的改变了hash值，只是改变的值和原来的hash值是一样的，用户看不出变化了，但这条记录已经在浏览器的历史记录中了，使用replace只是替换了第一条历史记录，手动触发hash值改变的这条并没有被替换，上报数据有误，故该方案pass
+
+解决方式：
+```js
+// 数据埋点js中添加一个上报PV,UV的方法，比如pushReport
+
+    /**
+     * 路由页面PV,UV上报
+     * pushReport
+     * @param {*} fromPath
+     * @param {*} toPath
+     * @memberof DataReport
+     */
+    pushReport(fromPath, toPath) {
+        let times = Date.now();
+        this.pushData.isPv = 1
+        this.pushData.timestampLeft = times
+        this.pushData.url = fromPath
+        this.pushData.pushData(false)
+        this.pushData.timestampLeft = ''
+        this.pushData.timestampEnter = times
+        this.pushData.url = toPath
+        this.pushData.pushData(false)
+    }
+// 在入口文件中Vue的实例下添加watch对$route的监听，切换路由上报数据埋点信息
+new Vue({
+	el: '#app',
+    router,
+    store,
+    watch: {
+        $route(to, from) {
+            let toPath = `${location.origin}${location.pathname}#${to.path}`,
+            fromPath = `${location.origin}${location.pathname}#${from.path}`
+            // 绑定在Vue原型上的数据埋点的实例化对象
+            Vue.prototype.DR.pushReport(fromPath, toPath)
+        }
+    },
+	render: h => h(App)
+})
+
+
+```
+
+## 13.打开构建好的页面，在低版本的android手机上显示空白页面
+低版本安卓手机访问页面发现是空白，不知道是怎么回事儿，找客户端的同学打印了加载网页的日志，发现是语法错误，怎么回事儿呢，仔细查看发现中转页的代码时es6写的，比如let，const，箭头函数都没有转换成es5，所以加载不了，进入到众邦宝的首页，发现还是空白，继续搜索，找到了打包之后的vendors.js文件发现有些es6的关键字没有被转化，排查原因，babel-loader转换js时，没有转化node_modules中的代码文件，但是我们私有包使用es6写的，修改babel-loader解析范围，最终解决问题
+
+## 14.输入框中的字体被光标挡住一点
+输入框光标压字问题，设置input的文字间距即可（letter-spacing: 1.5px）
