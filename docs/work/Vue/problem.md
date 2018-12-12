@@ -175,3 +175,45 @@ new Vue({
 
 ## 14.输入框中的字体被光标挡住一点
 输入框光标压字问题，设置input的文字间距即可（letter-spacing: 1.5px）
+
+## 15.路由某些页面缓存
+在根路由下又嵌套了路由，这个时候在嵌套了的路由中使用keep-alive可以缓存嵌套中的路由页面，但是在根路由下的一些页面跳回到嵌套的页面中时，发现keep-alive不起作用了
+
+最后在根路由下添加keep-alive包裹，然后在路由表中设置需要缓存页面的值，比如名字叫keepAlive: true
+```html
+<template>
+    <div>
+        <keep-alive>
+            <router-view v-if="$route.meta.keepAlive"></router-view>
+        </keep-alive>
+            <router-view v-if="!$route.meta.keepAlive"></router-view>
+    </div>
+</template>
+```
+不需要缓存的页面就不设置keepAlive，v-if会判断然后显示路由
+
+## 16.ios是不允许自动聚焦的
+ios是不允许自动聚焦的，但android是可以的，如果写上自动聚焦的代码，不会报错，只是不会起作用，但会导致ios聚焦的时候，出现光标飞入的情况，影响用户体验
+
+## 17.全局样式设定，比如修改html，body的样式，如果不设置scoped会影响其他组件
+全局样式设定，比如修改html，body的样式，最好在每个组件中都写上scoped，如果要修改全局的样式，请在组件中另写一个style不加scoped，又或者使用原生js的方式去获取html，body元素修改样式，一个组件中不写scoped的话会影响到其他组件的样式
+
+## 18.swiper修改分页器样式
+但是在style中scoped作用内始终没有效果，原来swiper是挂在到vue mounted之后的，并没有在template模板内，所以加不上，在同一个vue的组件中，在写一个style不加scoped，重写swiper的样式，就是全局的了，能覆盖swiper的样式，如果每个页面的body的样式不一样，那么我们可以在组件中写一个style去设置body的颜色
+
+## 19.rsa使用加密
+```js
+import JSEncrypt from '@zdmission/rsa'
+console.log(JSEncrypt)
+let encrypt = new JSEncrypt();
+encrypt.setPublicKey('-----BEGIN RSA PRIVATE KEY-----\n'+
+        'MIIBOQIBAAJAVY6quuzCwyOWzymJ7C4zXjeV/232wt2ZgJZ1kHzjI73wnhQ3WQcL\n'+
+        'DFCSoi2lPUW8/zspk0qWvPdtp6Jg5Lu7hwIDAQABAkBEws9mQahZ6r1mq2zEm3D/\n'+
+        'VM9BpV//xtd6p/G+eRCYBT2qshGx42ucdgZCYJptFoW+HEx/jtzWe74yK6jGIkWJ\n'+
+        'AiEAoNAMsPqwWwTyjDZCo9iKvfIQvd3MWnmtFmjiHoPtjx0CIQCIMypAEEkZuQUi\n'+
+        'pMoreJrOlLJWdc0bfhzNAJjxsTv/8wIgQG0ZqI3GubBxu9rBOAM5EoA4VNjXVigJ\n'+
+        'QEEk1jTkp8ECIQCHhsoq90mWM/p9L5cQzLDWkTYoPI49Ji+Iemi2T5MRqwIgQl07\n'+
+        'Es+KCn25OKXR/FJ5fu6A6A+MptABL3r8SEjlpLc=\n'+
+        '-----END RSA PRIVATE KEY-----');
+console.log(encrypt.encrypt('zdmission'))
+```
