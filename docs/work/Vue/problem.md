@@ -1,4 +1,4 @@
-# 做需求过程中的问题集合
+# 开发过程中的问题集合
 
 ## 1.vue中使用异步组件问题，通过一种自动引入组件并注册是不能实现异步的
 ![yibu](/work/Vue/problem/problem1-2.png)
@@ -216,4 +216,129 @@ encrypt.setPublicKey('-----BEGIN RSA PRIVATE KEY-----\n'+
         'Es+KCn25OKXR/FJ5fu6A6A+MptABL3r8SEjlpLc=\n'+
         '-----END RSA PRIVATE KEY-----');
 console.log(encrypt.encrypt('zdmission'))
+```
+
+## 20.弹层按钮出现错位
+弹层按钮出现错位，为什么，因为点击输入框会弹出原生键盘，这时候会把页面网上推，导致页面实际可视距离减少，当输入框失去焦点之后，提示弹层出现，但是绘制按钮的高度就存在高度差，导致按钮错位，弹出弹层时把执行window.scrollTo(0,0)滚动到顶部，这样可以解决问题
+
+## 21.页面卡顿，在某些需要的页面添加-webkit-overflow-scrolling: touch
+页面卡顿，在某些需要的页面添加-webkit-overflow-scrolling: touch，增强页面的滚动性，某些特定的页面需要设定，通过当前的路由来判别，路由中fullPath是指路由后边的全部字符，包括query，但是我们设定的数组中的路径值是不包括外加参数的，所以判断失效了
+```js
+document.querySelector('html').style.cssText = `-webkit-overflow-scrolling: touch;height:100%;overflow-x: hidden;`
+```
+
+## 22.ios手机中，页面使用了css3 transition横向滚动动画，会出现闪动的情况，导致用户体验不好
+布局方式：
+```html
+<div class="gundong-wrap">
+   <div class="gundong" :class="{'donghua':isAnimation}"  :style="{'animation-duration':sumDuration+'s','-webkit-animation-duration':sumDuration+'s'}">
+      <p ref="noticeP" class="msg pd-r-310 font-ws">{{$root.homeInfo.notice&&$root.homeInfo.notice.noticeContent}}</p>
+      <p v-show="isAnimation" class="msg special font-ws">{{$root.homeInfo.notice&&$root.homeInfo.notice.noticeContent}}</p>
+    </div>
+</div>
+```
+
+css样式
+```scss
+.gundong-wrap {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    .gundong {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width:max-content;
+        position: relative;
+        .empty {
+            height: 48px;
+            width: 300px;
+        }
+        .msg {
+            font-size: 28px;
+            white-space: nowrap;
+            line-height: 48px;
+            color: #666;
+            backface-visibility: hidden;
+        }
+        .pd-r-310 {
+            padding-right: 308px;
+        }
+        .special {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            padding-right: 300px;
+        }
+    }
+}
+
+.donghua {
+    // animation-fill-mode: forwards;
+    // animation: 8s move infinite linear;
+    animation-name: move;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-style: preserve-3d;
+    perspective: 1000;
+}
+```
+gundong是一个滚动层，采用flex横向布局，需要给gundong加上-webkit-transform-style: preserve-3d;perspective: 1000;属性以及给p元素加上-webkit-backface-visibility: hidden;即子元素背面隐藏
+
+## 23.页面缓存，如果使用了keep-alive缓存了组件，如何更新页面数据
+页面缓存，如果使用了keep-alive缓存了组件，那么该组件就会存在于内存中，下次加载的时候不会重新加载渲染组件而是直接从内存中取出该组件，但是我们的数据和用户状态是可能改变的，这时候需要显示到该组件上，但是该组件中的生命周期函数大多数是不会运行的，vue针对这种情况补充了两个生命周期钩子函数<font color=red>activated（组件被激活时调用）和deactivated（组件被停用是调用）</font>，所以我们把请求接口数据，更新view的操作放在该生命周期钩子函数中，当页面被缓存时也能更新页面数据
+
+## 24.手机号，银行卡号，姓名脱敏等处理
+```js
+var str = '11012345678'
+// 1.手机号按110 1234 5678这样的形式处理
+var reg = str.match(/^(\d{3})(\d{4})(\d{4})$/)
+`${reg[1]} ${reg[2]} ${reg[3]}`    // 110 1234 5678
+// 2.手机号中间4位加*
+`${reg[1]} **** ${reg[3]}`  // 110 **** 5678
+`${str.slice(0,3)} **** ${str.slice(-4)}`  // 110 **** 5678
+
+// 3.银行卡号每隔4位加空格
+'6214564585796854'.replace(/(.{4})/g, "$1 ").replace(/\s$/,'') // '6214 5645 8579 6854'
+
+// 4.银行卡号前四后四显示，中间用*代替
+`${'6214564585796854'.slice(0, 4)} **** **** ${'6214564585796854'.slice(-4)}` // 6214********6854
+
+// 5.姓名处理
+/**
+ * [sensitiveName 姓名脱敏]
+ * @return void
+ */
+export function sensitiveName(name) {
+    if(!name) {
+        return ""
+    }
+
+    if(name.length > 2) {
+        let arr = new Array(name.length - 1)
+        return name[0] + arr.join("*") + name[name.length - 1]
+    } else {
+        return name[0] + "*"
+    }
+}
+/**
+ * [sensitiveHandel 脱敏处理]
+ * @param  {[String]} val      [需要处理的值]
+ * @param  {[Number]} startNum [前几位不脱敏的值]
+ * @param  {[Number]} endNum   [后几位不脱敏的值]
+ * @return {[String]}          [处理以后的值]
+ */
+export function sensitiveHandel(val, startNum, endNum) {
+    if(!val) {
+        return ""
+    }
+
+    return val.replace(new RegExp(`(\\d{${startNum}})(\\d+)(\\d{${endNum}}|\\d{${endNum - 1}}X)`), ($0, $1, $2, $3) => {
+        for (let i = 0, len = $2.length; i < len; i++) {
+            $1 += "*";
+        }
+        return $1 + $3;
+    })
+}
+
 ```
