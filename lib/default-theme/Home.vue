@@ -18,7 +18,7 @@
     </div>
     <Content custom/>
     <div class="footer" v-if="data.footer">
-      {{ data.footer }}
+      {{ data.footer }} <a href="http://beian.miit.gov.cn/">{{data.beian}}</a>
     </div>
     <ScrollTop></ScrollTop>
     <RaysLine></RaysLine>

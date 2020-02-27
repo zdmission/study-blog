@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "node bin/vuepress dev docs",
-    "build": "node bin/vuepress build docs & npm run ftp",
+    "build": "node bin/vuepress build docs && npm run ftp",
     "build1": "node bin/vuepress build docs",
     "ftp": "gulp upload",
     "lint": "eslint --fix --ext .js,.vue bin/ lib/ test/",

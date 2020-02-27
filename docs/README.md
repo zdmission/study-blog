@@ -10,7 +10,8 @@ features:
   details: 好好工作.
 - title: 生活
   details: 余生很短，好好吃饭，好好生活.
-footer: Copyright © 2015 - 至今 京ICP备18038351号 Michel
+footer: Copyright © 2015 - 至今  Michel
+beian: 京ICP备18038351号
 ---
 
 ### 要么庸俗，要么孤独
