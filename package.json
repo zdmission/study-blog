@@ -1,7 +1,7 @@
 {
-  "name": "vuepress",
-  "version": "0.10.1",
-  "description": "Minimalistic doc generator with Vue component based layout system",
+  "name": "study-blog",
+  "version": "1.0.1",
+  "description": "一点一滴",
   "main": "lib/index.js",
   "bin": {
     "vuepress": "bin/vuepress.js"
@@ -25,12 +25,12 @@
     "vue",
     "generator"
   ],
-  "author": "Evan You",
+  "author": "zdmission",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vuejs/vuepress/issues"
+    "url": "https://github.com/zdmission/study-blog/issues"
   },
-  "homepage": "https://github.com/vuejs/vuepress#readme",
+  "homepage": "https://github.com/zdmission/study-blog/blob/master/README.md",
   "dependencies": {
     "@babel/core": "7.0.0-beta.47",
     "@vue/babel-preset-app": "3.0.0-beta.11",

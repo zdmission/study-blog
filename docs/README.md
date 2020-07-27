@@ -1,7 +1,7 @@
 ---
 home: true
-heroImage: /hero.png
-actionText: LB →
+heroImage: /hero.jpg
+actionText: GO →
 actionLink: /study/
 features:
 - title: 学习
@@ -10,7 +10,7 @@ features:
   details: 好好工作.
 - title: 生活
   details: 余生很短，好好吃饭，好好生活.
-footer: Copyright © 2015 - 至今  Michel
+footer: Copyright © 2015 - future  Michel
 beian: 京ICP备18038351号
 ---
 

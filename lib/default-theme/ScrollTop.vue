@@ -1,7 +1,6 @@
 <template>
     <transition name="loading-fade">
-        <div class="scroll-top-wrap" v-show="show" @click="goToTop">
-            Top
+        <div class="scroll-top-wrap page-back-top" v-show="show" @click="goToTop">
         </div>
     </transition>
 </template>
@@ -30,13 +29,14 @@ export default {
     goToTop () {
       // 回到顶部加一个缓动动画
       const timer = setInterval(() => {
-        let dis = document.documentElement.scrollTop || document.body.scrollTop, speed = dis / 4
-        if (document.body.scrollTop != 0) {
+        const dis = document.documentElement.scrollTop || document.body.scrollTop
+        const speed = dis / 4
+        if (document.body.scrollTop !== 0) {
           document.body.scrollTop -= speed
         } else {
           document.documentElement.scrollTop -= speed
         }
-        if (dis == 0) {
+        if (dis === 0) {
           clearInterval(timer)
         }
       }, 30)
@@ -49,15 +49,18 @@ export default {
 @import "~@default-theme/styles/config.styl"
 .scroll-top-wrap
   position fixed
-  height 50px
-  width 50px
+  height 43px
+  width 43px
   bottom 50px
   right 25px
-  background-color #e5e5ee
   text-align center
-  line-height 50px
-  border-radius 10px
   z-index 100
+
+.page-back-top
+  background-image: url("~@default-theme/images/sprite.png");
+  background-image: -webkit-image-set(url("~@default-theme/images/sprite.png") 1x, url("~@default-theme/images/sprite@2x.png") 2x);
+  background-size: 144px 103px;
+
 .loading-fade-enter-active
 .loading-fade-leave-active
   transition opacity .5s

@@ -18,7 +18,7 @@
       <li class="suggestion" v-for="(s, i) in suggestions"
         :class="{ focused: i === focusIndex }"
         @mousedown="go(i)"
-        @mouseenter="focus(i)">
+        @mouseenter="focus(i)" :key="i">
         <a :href="s.path" @click.prevent>
           <span class="page-title">{{ s.title || s.path }}</span>
           <span v-if="s.header" class="header">&gt; {{ s.header.title }}</span>

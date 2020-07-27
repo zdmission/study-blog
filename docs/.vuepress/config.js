@@ -5,12 +5,12 @@ module.exports = {
   locales: {
     '/': {
       lang: 'zh-CN',
-      title: 'AmbitionElegant',
-      description: '超级超级不爱“学习”的程序猿'
+      title: 'ZDMission',
+      description: '在雨中奔跑，倾听雨滴打在心底的徐旋律'
     }
   },
   head: [
-    ['link', { rel: 'icon', href: `/logo.png` }],
+    ['link', { rel: 'icon', href: `/logo.jpg` }],
     ['link', { rel: 'manifest', href: '/manifest.json' }],
     ['meta', { name: 'theme-color', content: '#3eaf7c' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
@@ -27,7 +27,7 @@ module.exports = {
     repo: 'https://github.com/zdmission/study-blog',
     // editLinks: true,
     docsDir: 'docs',
-    logo: '/hero.png',
+    logo: '/hero.jpg',
     accentColor: '#ac3e40',
 		per_page: 6,
     date_format: 'yyyy-MM-dd HH:mm:ss',
